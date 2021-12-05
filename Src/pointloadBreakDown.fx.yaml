@@ -1,0 +1,1133 @@
+pointloadBreakDown As screen:
+    Fill: =RGBA(255, 255, 255, 1)
+
+    totalDistrict As gallery.galleryHorizontal:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderThickness: =1
+        Height: =109
+        Items: =discreteDistrict
+        ShowScrollbar: =false
+        TemplateSize: =55
+        Width: =670
+        X: =22
+        Y: =654
+        ZIndex: =1
+
+        Rectangle8 As rectangle:
+            Fill: =RGBA(0, 94, 146, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =58
+            ZIndex: =1
+
+        nameDistrict As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =28
+            OnSelect: =Select(Parent)
+            Size: =8
+            Text: =ThisItem.Name
+            Width: =55
+            ZIndex: =2
+
+        rDistrict As label:
+            Align: =Align.Center
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =Switch(
+                    yearDrpDwn.SelectedText.Value,
+                    "2020",
+                    CountIf(
+                        projectDetails,
+                        DateDiff(
+                            Created,
+                            Today()
+                        ) <= DateDiff(
+                            DateValue("01/01/2020"),
+                            Today()
+                        ) && DateDiff(
+                            Created,
+                            Today()
+                        ) >= DateDiff(
+                            DateValue("01/01/2020") + 729,
+                            Today()
+                        ),
+                        Lower(businessUnit) = Lower(ThisItem.Name)
+                    ),
+                    "2021",
+                    CountIf(
+                        projectDetails,
+                        DateDiff(
+                            Created,
+                            Today()
+                        ) <= DateDiff(
+                            DateValue("01/01/2021"),
+                            Today()
+                        ) && DateDiff(
+                            Created,
+                            Today()
+                        ) > DateDiff(
+                            DateValue("01/01/2021") + 365,
+                            Today()
+                        ),
+                        Lower(businessUnit) = Lower(ThisItem.Name)
+                    ),
+                    "2022",
+                    "2021",
+                    CountIf(
+                        projectDetails,
+                        DateDiff(
+                            Created,
+                            Today()
+                        ) <= DateDiff(
+                            DateValue("01/01/2021"),
+                            Today()
+                        ) && DateDiff(
+                            Created,
+                            Today()
+                        ) > DateDiff(
+                            DateValue("01/01/2021") + 365,
+                            Today()
+                        ),
+                        Lower(businessUnit) = Lower(ThisItem.Name)
+                    )
+                )
+            Width: =53
+            Y: =37
+            ZIndex: =3
+
+        pDistrict As label:
+            Align: =Align.Center
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =Switch(
+                    yearDrpDwn.SelectedText.Value,
+                    "2020",
+                    CountIf(
+                        projectDetails,
+                        DateDiff(
+                            Created,
+                            Today()
+                        ) <= DateDiff(
+                            DateValue("01/01/2020"),
+                            Today()
+                        ) && DateDiff(
+                            Created,
+                            Today()
+                        ) >= DateDiff(
+                            DateValue("01/01/2020") + 729,
+                            Today()
+                        ),
+                        Lower(businessUnit) = Lower(ThisItem.Name) && projectStatus = "Completed"
+                    ),
+                    "2021",
+                    CountIf(
+                        projectDetails,
+                        DateDiff(
+                            Created,
+                            Today()
+                        ) <= DateDiff(
+                            DateValue("01/01/2021"),
+                            Today()
+                        ) && DateDiff(
+                            Created,
+                            Today()
+                        ) > DateDiff(
+                            DateValue("01/01/2021") + 365,
+                            Today()
+                        ),
+                        Lower(businessUnit) = Lower(ThisItem.Name) && projectStatus = "Completed"
+                    ),
+                    "2022",
+                    "2021",
+                    CountIf(
+                        projectDetails,
+                        DateDiff(
+                            Created,
+                            Today()
+                        ) <= DateDiff(
+                            DateValue("01/01/2021"),
+                            Today()
+                        ) && DateDiff(
+                            Created,
+                            Today()
+                        ) > DateDiff(
+                            DateValue("01/01/2021") + 365,
+                            Today()
+                        ),
+                        Lower(businessUnit) = Lower(ThisItem.Name) && projectStatus = "Completed"
+                    )
+                )
+            VerticalAlign: =VerticalAlign.Top
+            Width: =53
+            Y: =73
+            ZIndex: =4
+
+        Rectangle14 As rectangle:
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =62
+            OnSelect: =Select(Parent)
+            Visible: =false
+            Width: =1
+            X: =54
+            Y: =37
+            ZIndex: =5
+
+        Rectangle15 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =50
+            X: =2.5
+            Y: =66
+            ZIndex: =6
+
+    "totalSummary As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderThickness: =1
+        Height: =444
+        Items: =Switch(yearDrpDwn.SelectedText.Value, "2020", twentytwenty, "2021", twentytwentyone, "2022", twentytwentyone)
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =37
+        Width: =seperatorTotal.Width
+        X: =926
+        Y: =115
+        ZIndex: =7
+
+        seperatorTotal As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Visible: =false
+            Width: =totalPH.X - totalRH.X + totalPH.Width
+            Y: =36
+            ZIndex: =2
+
+        totalR As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) <= DateDiff(
+                        DateValue(ThisItem.Strt),
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.Mthn,
+                        Today()
+                    )
+                )
+            Width: =70
+            X: =2
+            Y: =3
+            ZIndex: =4
+
+        totalP As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: =CountIf(projectDetails, DateDiff(Created, Today()) <= DateDiff(DateValue(ThisItem.Strt), Today()) && DateDiff(Created, Today())  >= DateDiff(DateValue(ThisItem.Strt) + ThisItem.Mthn, Today()), projectStatus = "Requested")
+            Width: =70
+            X: =161
+            Y: =3
+            ZIndex: =5
+
+        totalC As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: =totalR.Text - totalP.Text
+            Width: =70
+            X: =81
+            Y: =2
+            ZIndex: =6
+
+        Rectangle12 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =231
+            Y: =36
+            ZIndex: =7
+
+        Rectangle13 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =32
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =75
+            Y: =3
+            ZIndex: =8
+
+        Rectangle13_1 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =32
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =159
+            Y: =3
+            ZIndex: =9
+
+    headerTotalDistrict As label:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =RGBA(38, 110, 50, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =34
+        PaddingLeft: =12
+        Size: =11
+        Text: ="By DISTRICT"
+        Width: =670
+        X: =22
+        Y: =613
+        ZIndex: =10
+
+    "totalHeader As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =41
+        Items: =CustomGallerySample
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =41
+        Width: =1156
+        X: =8
+        Y: =67
+        ZIndex: =11
+
+        Rectangle9_2 As rectangle:
+            Fill: =RGBA(38, 110, 50, 1)
+            Height: =41
+            OnSelect: =Select(Parent)
+            Width: =231
+            X: =919
+            ZIndex: =1
+
+        Rectangle9_1 As rectangle:
+            Fill: =RGBA(0, 94, 146, 1)
+            Height: =41
+            OnSelect: =Select(Parent)
+            Width: =799
+            X: =99
+            ZIndex: =2
+
+        Rectangle9 As rectangle:
+            Fill: =RGBA(0, 94, 146, 1)
+            Height: =41
+            OnSelect: =Select(Parent)
+            Width: =70
+            X: =14
+            ZIndex: =3
+
+        month As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =10
+            Text: ="MONTH"
+            Width: =70
+            X: =14
+            Y: =3
+            ZIndex: =4
+
+        Label44_7 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 1 R"
+            Width: =70
+            X: =99
+            Y: =3
+            ZIndex: =5
+
+        Label43_6 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 1 C"
+            Width: =70
+            X: =180
+            Y: =3
+            ZIndex: =6
+
+        Label44_8 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 2 C"
+            Width: =70
+            X: =342
+            Y: =3
+            ZIndex: =7
+
+        Label43_7 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 2 R"
+            Width: =70
+            X: =261
+            Y: =3
+            ZIndex: =8
+
+        Label44_9 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 3 R"
+            Width: =70
+            X: =423
+            Y: =3
+            ZIndex: =9
+
+        Label43_8 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 3 C"
+            Width: =70
+            X: =504
+            Y: =3
+            ZIndex: =10
+
+        Label44_10 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 4 R"
+            Width: =70
+            X: =585
+            Y: =3
+            ZIndex: =11
+
+        Label44_11 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 4 C"
+            Width: =70
+            X: =666
+            Y: =3
+            ZIndex: =12
+
+        totalRH As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =10
+            Text: ="TOTAL R"
+            Width: =70
+            X: =919
+            Y: =3
+            ZIndex: =13
+
+        totalCH As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =10
+            Text: ="TOTAL C"
+            Width: =70
+            X: =999
+            Y: =3
+            ZIndex: =14
+
+        totalPH As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =10
+            Text: ="TOTAL P"
+            Width: =70
+            X: =1080
+            Y: =3
+            ZIndex: =15
+
+        Label44_12 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 5 R"
+            Width: =70
+            X: =747
+            Y: =3
+            ZIndex: =16
+
+        Label44_13 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingLeft: =3
+            Size: =10
+            Text: ="Week 5 C"
+            Width: =70
+            X: =826
+            Y: =3
+            ZIndex: =17
+
+    yearDrpDwn As dropdown:
+        Default: ="2021"
+        Height: =41
+        Items: =[2020, 2021, 2022]
+        OnSelect: =If(yearDrpDwn.SelectedText.Value = "2021", Set(yearVar, "twentytwentyone"); Set(yearDateVar, "01/01/2021"), yearDrpDwn.SelectedText.Value = "2020", Set(yearVar, "twentytwenty"); Set(yearDateVar, "01/01/2020"), Set(yearVar, "twentytwentyone"); Set(yearDateVar, "01/01/2021"))
+        Width: =175
+        X: =1170
+        Y: =67
+        ZIndex: =12
+
+    "monthGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(255, 255, 255, 1)
+        Height: =453
+        Items: |-
+            =Switch(
+                yearDrpDwn.SelectedText.Value,
+                "2020",
+                twentytwenty,
+                "2021",
+                twentytwentyone,
+                "2022",
+                twentytwentyone
+            )
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =37
+        Width: =70
+        X: =22
+        Y: =120
+        ZIndex: =13
+
+        Rectangle11 As rectangle:
+            Fill: =RGBA(0, 94, 146, 1)
+            Height: =37
+            OnSelect: =Select(Parent)
+            Width: =70
+            ZIndex: =1
+
+        allMonth As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =11
+            Text: =ThisItem.Name
+            Width: =70
+            ZIndex: =2
+
+    "totalSummary_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderThickness: =1
+        Height: =444
+        Items: =Switch(yearDrpDwn.SelectedText.Value, "2020", twentytwenty, "2021", twentytwentyone, "2022", twentytwentyone)
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =37
+        Width: =800
+        X: =107
+        Y: =117
+        ZIndex: =14
+
+        seperatorTotal_1 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Visible: =false
+            Y: =36
+            ZIndex: =2
+
+        totalR_1 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) <= DateDiff(
+                        DateValue(ThisItem.Strt),
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk1,
+                        Today()
+                    )
+                )
+            Width: =70
+            Y: =3
+            ZIndex: =4
+
+        totalP_1 As label:
+            Align: =Align.Center
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk1,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk2,
+                        Today()
+                    )
+                )
+            Width: =70
+            X: =162
+            Y: =2
+            ZIndex: =5
+
+        totalC_1 As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) <= DateDiff(
+                        DateValue(ThisItem.Strt),
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk1,
+                        Today()
+                    ),
+                    projectStatus = "Completed"
+                )
+            Width: =70
+            X: =81
+            Y: =2
+            ZIndex: =6
+
+        totalR_2 As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk1,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk2,
+                        Today()
+                    ), projectStatus = "Completed"
+                )
+            Width: =70
+            X: =243
+            Y: =2
+            ZIndex: =7
+
+        totalP_2 As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk2,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk3,
+                        Today()
+                    ), projectStatus = "Completed"
+                )
+            Width: =70
+            X: =405
+            Y: =1
+            ZIndex: =8
+
+        totalC_2 As label:
+            Align: =Align.Center
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk2,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk3,
+                        Today()
+                    )
+                )
+            Width: =70
+            X: =324
+            Y: =1
+            ZIndex: =9
+
+        totalP_3 As label:
+            Align: =Align.Center
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk3,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk4,
+                        Today()
+                    )
+                )
+            Width: =70
+            X: =486
+            Y: =1
+            ZIndex: =10
+
+        totalR_3 As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk3,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk4,
+                        Today()
+                    ), projectStatus = "Completed"
+                )
+            Width: =70
+            X: =567
+            Y: =1
+            ZIndex: =11
+
+        totalP_4 As label:
+            Align: =Align.Center
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk4,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk5,
+                        Today()
+                    ), projectStatus = "Completed"
+                )
+            Width: =70
+            X: =730
+            ZIndex: =12
+
+        totalC_3 As label:
+            Align: =Align.Center
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Courier New'
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =CountIf(
+                    projectDetails,
+                    DateDiff(
+                        Created,
+                        Today()
+                    ) < DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk4,
+                        Today()
+                    ) && DateDiff(
+                        Created,
+                        Today()
+                    ) >= DateDiff(
+                        DateValue(ThisItem.Strt) + ThisItem.wk5,
+                        Today()
+                    )
+                )
+            Width: =70
+            X: =648
+            ZIndex: =13
+
+        Rectangle5 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =78
+            Y: =4
+            ZIndex: =14
+
+        Rectangle5_1 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =156
+            Y: =4
+            ZIndex: =15
+
+        Rectangle5_3 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =236
+            Y: =4
+            ZIndex: =17
+
+        Rectangle5_4 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =318
+            Y: =4
+            ZIndex: =18
+
+        Rectangle5_5 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =401
+            Y: =4
+            ZIndex: =19
+
+        Rectangle5_6 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =480
+            Y: =4
+            ZIndex: =20
+
+        Rectangle5_7 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =563
+            Y: =4
+            ZIndex: =21
+
+        Rectangle5_8 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =646
+            Y: =4
+            ZIndex: =22
+
+        Rectangle5_9 As rectangle:
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =28
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =723
+            Y: =4
+            ZIndex: =23
+
+        Rectangle6 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =800
+            Y: =36
+            ZIndex: =25
+
+    Group9 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =16
+
+        Rectangle1 As rectangle:
+            Height: =55
+            Visible: =Not(Parent.Printing)
+            Width: =1366
+            ZIndex: =3
+
+        Icon10 As icon.Home:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =36
+            Icon: =Icon.Home
+            OnSelect: =Navigate(menuScreen)
+            Visible: =Not(Parent.Printing)
+            Width: =36
+            X: =103
+            Y: =10
+            ZIndex: =4
+
+        Icon10_1 As icon.Home:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =36
+            Icon: =Icon.BackArrow
+            OnSelect: =Back()
+            Visible: =Not(Parent.Printing)
+            Width: =32
+            X: =34
+            Y: =10
+            ZIndex: =5
+
+        Label16 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =46
+            Italic: =true
+            Text: ="Pointload Breakdown"
+            Visible: =Not(Parent.Printing)
+            Width: =263
+            X: =1025
+            Y: =4
+            ZIndex: =9
+
+    Icon11 As icon.Print:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =35
+        Icon: =Icon.Print
+        OnSelect: =Print()
+        Visible: =Not(Parent.Printing)
+        Width: =35
+        X: =1308
+        Y: =10
+        ZIndex: =17
+
+    Rectangle10 As rectangle:
+        Height: =477
+        Width: =175
+        X: =1170
+        Y: =120
+        ZIndex: =18
+
+    sumGroup As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =18
+
+        Rectangle7 As rectangle:
+            Fill: =RGBA(38, 110, 50, 1)
+            Height: =34
+            Width: =231
+            X: =926
+            Y: =563
+            ZIndex: =2
+
+        Label4_5 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderThickness: =1
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.View
+            FocusedBorderThickness: =1
+            FontWeight: =FontWeight.Bold
+            Height: =35
+            Live: =Live.Polite
+            Size: =15
+            Text: =Sum(totalSummary.AllItems, totalR) & "  |   " & Sum(totalSummary.AllItems, totalC) & "   |   " & Sum(totalSummary.AllItems, totalP)
+            Width: =231
+            X: =926
+            Y: =562
+            ZIndex: =8
+
+    Label4 As label:
+        BorderThickness: =1
+        Font: =Font.Arial
+        FontWeight: =FontWeight.Semibold
+        Height: =150
+        PaddingLeft: =15
+        Size: =15
+        Text: |-
+            ="LEGEND" & Char(10)  & Char(10) & "R :  Received" & Char(10) & "C :  Completed" & Char(10) & "P :  Pending"
+        Width: =173
+        X: =1170
+        Y: =613
+        ZIndex: =19
+

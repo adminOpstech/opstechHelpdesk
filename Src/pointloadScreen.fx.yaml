@@ -1,0 +1,519 @@
+pointloadScreen As screen:
+    Fill: =RGBA(251, 188, 159, 1)
+    OnVisible: =ClearCollect(projectsDepartmentCollection, projectsDepartment) 
+
+    "approvalsGalleryGIS_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderThickness: =2
+        DelayItemLoading: =true
+        Fill: =RGBA(241, 244, 249, 1)
+        Height: =546
+        Items: |-
+            =Search(
+                If(
+                    Dropdown2_6.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' = "All" And Dropdown2_8.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' = "All",
+                    projectsDepartmentCollection,        
+                    Dropdown2_6.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' <> "All" And Dropdown2_8.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' = "All",
+                    Filter(
+                        projectsDepartmentCollection,
+                        Lower(projectStatus) = Lower(Dropdown2_6.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle')
+                    ),
+                    Dropdown2_6.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' = "All" And Dropdown2_8.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' <> "All",
+                    Filter(
+                        projectsDepartmentCollection,
+                        Lower(businessUnit) =  Lower(Dropdown2_8.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle')
+                    ),
+                    Dropdown2_6.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' <> "All" And Dropdown2_8.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle' <> "All",
+                    Filter(
+                        projectsDepartmentCollection,
+                        Lower(businessUnit) =  Lower(Dropdown2_8.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle'), Lower(projectStatus) = Lower(Dropdown2_6.SelectedText.'data-ADB4D7A662F548B49FAC2B986E348A1BTitle')
+                    )
+                ),
+                TextInput4_6.Text,
+                "ProjectNumber",
+                "Capacity",
+                "NameOfProject",
+                "Title",
+                "businessUnit"
+            )
+        Layout: =Layout.Vertical
+        LoadingSpinner: =LoadingSpinner.Controls
+        OnSelect: =
+        ShowNavigation: =true
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =91
+        Width: =1326
+        X: =20
+        Y: =204
+        ZIndex: =1
+
+        Rectangle4_16 As rectangle:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Fill: =RGBA(209, 232, 178, 1)
+            Height: =91
+            OnSelect: =
+            Visible: =ThisItem.IsSelected
+            Width: =1325
+            ZIndex: =1
+
+        Separator1_18 As rectangle:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Fill: =RGBA(32, 54, 71, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =2
+
+        Label40_16 As label:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =90
+            OnSelect: =Select(Parent)
+            PaddingLeft: =10
+            Size: =7
+            Text: =ThisItem.NameOfProject
+            Width: =120
+            Y: =1
+            ZIndex: =3
+
+        Label41_16 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.ProjectNumber
+            Width: =91
+            X: =103
+            Y: =1
+            ZIndex: =4
+
+        Label42_16 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.projectLocation
+            Width: =144
+            X: =195
+            Y: =1
+            ZIndex: =5
+
+        Label32_17 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.typeOfProject
+            Width: =Label40_16.Width
+            X: =339
+            Y: =1
+            ZIndex: =6
+
+        Label33_17 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.NameOfFeeder
+            Width: =Label40_16.Width
+            X: =453
+            ZIndex: =7
+
+        Label35_16 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.Capacity
+            Width: =Label40_16.Width
+            X: =557
+            ZIndex: =8
+
+        Label36_16 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.VTRatio
+            Width: =Label40_16.Width
+            X: =671
+            ZIndex: =9
+
+        Label37_34 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.businessUnit
+            Width: =115
+            X: =780
+            ZIndex: =10
+
+        Label37_35 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.contractorPhoneNumber
+            Width: =104
+            X: =895
+            ZIndex: =11
+
+        Icon20_6 As icon.clearDrawing:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Color: =RGBA(32, 54, 71, 1)
+            Height: =39
+            Icon: =Icon.Post
+            OnSelect: |-
+                =Patch(projectsDepartment, ThisItem, {xAxis: TextX.Text}, {yAxis: TextY.Text}, {projectStatus: "Completed"}, {spans: spans.Text}, {'completed Date': Today()}, {'gis Status': "Submitted"})   //Set(gVar, ThisItem); Set(varGForm, true)
+            Width: =39
+            X: =1264
+            Y: =26
+            ZIndex: =13
+
+        Label37_37 As label:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Height: =Label40_16.Height
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.ProjectEngineers.DisplayName
+            Width: =104
+            X: =1146
+            ZIndex: =14
+
+        Label37_36 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Color: =RGBA(99, 139, 44, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =91
+            Italic: =true
+            OnSelect: =Select(Parent)
+            Size: =Label40_16.Size
+            Text: =ThisItem.xAxis & " " & ThisItem.yAxis
+            Width: =147
+            X: =999
+            ZIndex: =17
+
+        Group3_6 As group:
+            Height: =5
+            Width: =5
+            X: =-1209
+            Y: =15
+            ZIndex: =17
+
+            Circle1_6 As circle:
+                BorderColor: =RGBA(32, 54, 71, 1)
+                Fill: =RGBA(251, 188, 159, 1)
+                Height: =64
+                OnSelect: =Select(Parent)
+                Visible: =If(ThisItem.projectStatus = "Completed", true, false)
+                Width: =70
+                X: =1246
+                Y: =13
+                ZIndex: =15
+
+            Icon21_6 As icon.Check:
+                BorderColor: =RGBA(32, 54, 71, 1)
+                Color: =RGBA(99, 139, 44, 1)
+                Height: =39
+                Icon: =Icon.Check
+                OnSelect: =
+                Visible: =If(ThisItem.projectStatus = "Completed", true, false)
+                Width: =39
+                X: =1261
+                Y: =27
+                ZIndex: =16
+
+        TextY As text:
+            Default: =
+            Height: =30
+            HintText: ="y axis"
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =1
+            RadiusBottomRight: =1
+            RadiusTopLeft: =1
+            RadiusTopRight: =1
+            Visible: =If(ThisItem.projectStatus = "Requested", true, false) 
+            Width: =120
+            X: =1019
+            Y: =50
+            ZIndex: =18
+
+        TextX As text:
+            Default: =
+            Height: =30
+            HintText: ="x axis"
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =1
+            RadiusBottomRight: =1
+            RadiusTopLeft: =1
+            RadiusTopRight: =1
+            Visible: =If(ThisItem.projectStatus = "Requested", true, false) 
+            Width: =120
+            X: =1019
+            Y: =11
+            ZIndex: =19
+
+        spans As text:
+            Default: =
+            Format: =TextFormat.Number
+            Height: =67
+            HintText: ="spans"
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =1
+            RadiusBottomRight: =1
+            RadiusTopLeft: =1
+            RadiusTopRight: =1
+            Visible: =If(ThisItem.projectStatus = "Requested", true, false) 
+            Width: =88
+            X: =1157
+            Y: =13
+            ZIndex: =20
+
+    titleTabMetering_6 As gallery.variableTemplateHeightGallery:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        BorderThickness: =1
+        Fill: =RGBA(209, 232, 178, 1)
+        Height: =48
+        Items: =CustomGallerySample
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplateSize: =43
+        Width: =1326
+        X: =20
+        Y: =148
+        ZIndex: =2
+
+        Label63_7 As label:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =FontWeight.Bold
+            OnSelect: =Select(Parent)
+            Size: =11
+            Text: ="Project Name"
+            Width: =90
+            ZIndex: =1
+
+        Label64_7 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Address"
+            Width: =185
+            X: =175
+            ZIndex: =2
+
+        Label65_7 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Project Number"
+            Width: =102
+            X: =90
+            ZIndex: =3
+
+        Label66_7 As label:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Project Type"
+            Width: =107
+            X: =346
+            ZIndex: =4
+
+        Label67_7 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Feeder"
+            Width: =91
+            X: =459
+            ZIndex: =5
+
+        Label68_7 As label:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Capacity"
+            Width: =81
+            X: =573
+            ZIndex: =6
+
+        Label69_7 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Vt Ratio"
+            Width: =116
+            X: =667
+            ZIndex: =7
+
+        Label70_22 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Business Unit"
+            Width: =96
+            X: =788
+            ZIndex: =8
+
+        Label70_26 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Contractor"
+            Width: =96
+            X: =889
+            ZIndex: =9
+
+        Label70_28 As label:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Project Engineer"
+            Width: =77
+            X: =1147
+            ZIndex: =10
+
+        Label70_29 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(32, 54, 71, 1)
+            FontWeight: =Label63_7.FontWeight
+            OnSelect: =Select(Parent)
+            Size: =Label63_7.Size
+            Text: ="Cordinates"
+            Width: =96
+            X: =1018
+            Y: =3
+            ZIndex: =11
+
+    Dropdown2_6 As dropdown:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        ChevronBackground: =RGBA(50, 86, 160, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(100, 118, 132, 1), -20%)
+        Default: ="All"
+        HoverFill: =RGBA(205, 209, 213, 1)
+        Items: |-
+            =Table({Title: "All"}, {Title: "Completed"}, {Title: "Requested"})
+        PressedFill: =RGBA(32, 54, 71, 1)
+        SelectionFill: =RGBA(100, 118, 132, 1)
+        X: =20
+        Y: =94
+        ZIndex: =3
+
+    TextInput4_6 As text:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        BorderThickness: =1
+        Default: =
+        FocusedBorderThickness: =1
+        HoverBorderColor: =RGBA(32, 54, 71, 1)
+        HoverFill: =RGBA(205, 209, 213, 1)
+        PaddingLeft: =45
+        RadiusBottomLeft: =1
+        RadiusBottomRight: =1
+        RadiusTopLeft: =1
+        RadiusTopRight: =1
+        Width: =361
+        X: =985
+        Y: =94
+        ZIndex: =4
+
+    Icon13_6 As icon.ArrowsUpDown:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Color: =RGBA(32, 54, 71, 1)
+        Height: =32
+        Icon: =Icon.Sort
+        Width: =32
+        X: =744
+        Y: =98
+        ZIndex: =5
+
+    Icon14_6 As icon.Search:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Color: =RGBA(219, 219, 219, 1)
+        Height: =16
+        Icon: =Icon.Search
+        Width: =16
+        X: =997
+        Y: =105
+        ZIndex: =6
+
+    Title1_5 As label:
+        Align: =Align.Center
+        Fill: =RGBA(50, 86, 160, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =64
+        PaddingRight: =10
+        Text: ="OPTECH HELPDESK (POINTLOAD)"
+        Width: =Parent.Width
+        ZIndex: =7
+
+    Icon2_5 As icon.CheckBadge:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =35
+        Icon: =Icon.NextArrow
+        OnSelect: =Back()
+        Rotation: =180
+        Width: =35
+        X: =23
+        Y: =15
+        ZIndex: =8
+
+    Icon4 As icon.Database:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =42
+        Icon: =Icon.Database
+        OnSelect: =Navigate(pointloadBreakDown)
+        Width: =42
+        X: =1243
+        Y: =11
+        ZIndex: =10
+
+    Icon4_2 As icon.Database:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =42
+        Icon: =Icon.Print
+        OnSelect: =Navigate(pointloadPrintScreen)
+        Width: =42
+        X: =1304
+        Y: =11
+        ZIndex: =11
+
+    Dropdown2_8 As dropdown:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        ChevronBackground: =RGBA(50, 86, 160, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(100, 118, 132, 1), -20%)
+        Default: ="All"
+        HoverFill: =RGBA(205, 209, 213, 1)
+        Items: |-
+            =Table({Title: "All"}, {Title: "Agbara"},  {Title: "Apapa"},  {Title: "Festac"},  {Title: "Ibeju"}, {Title: "Ijora"}, {Title: "Island"},  {Title: "Lekki"},  {Title: "Mushin"},  {Title: "Ojo"}, {Title: "Orile"})
+        PressedFill: =RGBA(32, 54, 71, 1)
+        SelectionFill: =RGBA(100, 118, 132, 1)
+        X: =388
+        Y: =94
+        ZIndex: =12
+

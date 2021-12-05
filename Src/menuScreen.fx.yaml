@@ -1,0 +1,318 @@
+menuScreen As screen:
+    Fill: =RGBA(50, 86, 160, 1)
+
+    Icon7 As icon.ArrowLeft:
+        Color: =RGBA(255, 255, 255, 1)
+        Icon: =Icon.Leave
+        OnSelect: =Exit()
+        Rotation: =180
+        X: =40
+        Y: =58
+        ZIndex: =3
+
+    Image2 As image:
+        Image: =varUser.Image
+        RadiusBottomLeft: =540
+        RadiusBottomRight: =540
+        RadiusTopLeft: =540
+        RadiusTopRight: =540
+        X: =1207
+        Y: =40
+        ZIndex: =4
+
+    Icon8 As icon.Add:
+        Color: =RGBA(255, 255, 255, 1)
+        Icon: =Icon.Add
+        Visible: =false
+        X: =1243
+        Y: =58
+        ZIndex: =5
+
+    Group4 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =20
+
+        Button1_7 As button:
+            Align: =Align.Right
+            Fill: =RGBA(250, 155, 112, 1)
+            Height: =100
+            PaddingLeft: =30
+            PaddingRight: =30
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="ASSIGNMENTS"
+            Width: =327
+            X: =709
+            Y: =194
+            ZIndex: =14
+
+        Image4_2 As image:
+            Height: =45
+            Image: =rotation
+            Width: =45
+            X: =737
+            Y: =224
+            ZIndex: =15
+
+        Button1_8 As button:
+            Align: =Align.Left
+            Color: =RGBA(0, 0, 0, 0)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            HoverBorderColor: =Transparent
+            HoverColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =Transparent
+            OnSelect: =Navigate(assignmentScreen)
+            PaddingLeft: =30
+            PressedBorderColor: =Transparent
+            PressedColor: =Transparent
+            PressedFill: =Transparent
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="APPROVALS"
+            Width: =327
+            X: =709
+            Y: =194
+            ZIndex: =16
+
+    Group6 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =20
+
+        Button1 As button:
+            Align: =Align.Left
+            Fill: =RGBA(250, 155, 112, 1)
+            Height: =100
+            PaddingLeft: =90
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="TICKETS"
+            Width: =327
+            X: =274
+            Y: =376
+            ZIndex: =1
+
+        Image4 As image:
+            Height: =47
+            Image: =ticket
+            Width: =47
+            X: =525
+            Y: =402
+            ZIndex: =7
+
+        Button1_1 As button:
+            Align: =Align.Left
+            Color: =RGBA(0, 0, 0, 0)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            HoverBorderColor: =Transparent
+            HoverColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =Transparent
+            OnSelect: =Navigate(ticketsScreen)
+            PaddingLeft: =30
+            PressedBorderColor: =Transparent
+            PressedColor: =Transparent
+            PressedFill: =Transparent
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="APPROVALS"
+            Width: =327
+            X: =274
+            Y: =376
+            ZIndex: =10
+
+    Group5 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =20
+
+        Button1_2 As button:
+            Align: =Align.Left
+            Fill: =RGBA(250, 155, 112, 1)
+            Height: =100
+            PaddingLeft: =50
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="APPROVALS"
+            Width: =327
+            X: =274
+            Y: =194
+            ZIndex: =11
+
+        Image4_1 As image:
+            Height: =47
+            Image: =approval
+            Width: =47
+            X: =525
+            Y: =223
+            ZIndex: =12
+
+        Button1_6 As button:
+            Align: =Align.Left
+            Color: =RGBA(0, 0, 0, 0)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            HoverBorderColor: =Transparent
+            HoverColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =Transparent
+            OnSelect: =Navigate(approvalsScreen)
+            PaddingLeft: =30
+            PressedBorderColor: =Transparent
+            PressedColor: =Transparent
+            PressedFill: =Transparent
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="APPROVALS"
+            Width: =327
+            X: =274
+            Y: =194
+            ZIndex: =13
+
+    Group7 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =20
+
+        Button1_9 As button:
+            Align: =Align.Right
+            Fill: =RGBA(250, 155, 112, 1)
+            Height: =100
+            PaddingLeft: =30
+            PaddingRight: =40
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="POINTLOADS"
+            Width: =327
+            X: =709
+            Y: =376
+            ZIndex: =17
+
+        Image4_3 As image:
+            Height: =45
+            Image: =transformer
+            Width: =45
+            X: =737
+            Y: =403
+            ZIndex: =18
+
+        Button1_10 As button:
+            Align: =Align.Left
+            Color: =RGBA(0, 0, 0, 0)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            HoverBorderColor: =Transparent
+            HoverColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =Transparent
+            OnSelect: =Navigate(pointloadScreen)
+            PaddingLeft: =30
+            PressedBorderColor: =Transparent
+            PressedColor: =Transparent
+            PressedFill: =Transparent
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="APPROVALS"
+            Width: =327
+            X: =709
+            Y: =376
+            ZIndex: =19
+
+    Group8 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =23
+
+        Button1_11 As button:
+            Align: =Align.Right
+            Fill: =RGBA(250, 155, 112, 1)
+            Height: =100
+            PaddingLeft: =50
+            PaddingRight: =40
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="FEEDER CLOSEOUT"
+            Width: =327
+            X: =709
+            Y: =551
+            ZIndex: =20
+
+        Image4_4 As image:
+            Height: =45
+            Image: =padlock
+            Width: =45
+            X: =737
+            Y: =578
+            ZIndex: =21
+
+        Button1_12 As button:
+            Align: =Align.Left
+            Color: =RGBA(0, 0, 0, 0)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =100
+            HoverBorderColor: =Transparent
+            HoverColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =Transparent
+            OnSelect: =Notify("Closed Out For Now")  //Navigate(closeOutScreen); NewForm(closeOutForm)
+            PaddingLeft: =30
+            PressedBorderColor: =Transparent
+            PressedColor: =Transparent
+            PressedFill: =Transparent
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Size: =20
+            Text: ="APPROVALS"
+            Width: =327
+            X: =709
+            Y: =551
+            ZIndex: =22
+

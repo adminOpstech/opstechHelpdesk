@@ -1,0 +1,190 @@
+closeOutList As screen:
+    Fill: =RGBA(251, 188, 159, 1)
+
+    "Gallery1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderThickness: =1
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =608
+        Items: =Filter(feederCloseOutCollection, CloseOutStatus <> "finish")
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =81
+        Width: =1305
+        X: =32
+        Y: =140
+        ZIndex: =1
+
+        NextArrow1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =If(ThisItem.CloseOutStatus = "Cancelled", Icon.Cancel, ThisItem.CloseOutStatus = "Finished", Icon.Check, Icon.Clock)
+            OnSelect: =
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =79
+            X: =1221
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator2 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Label3 As label:
+            Height: =81
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: =ThisItem.Feeder
+            Width: =184
+            ZIndex: =6
+
+        Label5 As label:
+            Height: =81
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: =ThisItem.District
+            Width: =213
+            X: =184
+            ZIndex: =7
+
+        Label8 As label:
+            Height: =81
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: =ThisItem.SMD.DisplayName
+            Width: =304
+            X: =397
+            ZIndex: =8
+
+        Label8_1 As label:
+            Height: =81
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: =ThisItem.TeamMember.DisplayName
+            Width: =269
+            X: =701
+            ZIndex: =9
+
+        Label8_2 As label:
+            Height: =81
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: =ThisItem.CloseOutStatus
+            Width: =251
+            X: =970
+            ZIndex: =10
+
+    Rectangle1_2 As rectangle:
+        Height: =55
+        Width: =1366
+        ZIndex: =2
+
+    Icon10_4 As icon.Home:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =36
+        Icon: =Icon.Home
+        OnSelect: =Navigate(menuScreen)
+        Width: =36
+        X: =83
+        Y: =10
+        ZIndex: =3
+
+    Icon10_5 As icon.Home:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =36
+        Icon: =Icon.BackArrow
+        OnSelect: =Back()
+        Width: =32
+        X: =35
+        Y: =10
+        ZIndex: =4
+
+    Label16_2 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =48
+        Italic: =true
+        Text: ="Feeder Close Out List"
+        Width: =219
+        X: =1118
+        Y: =7
+        ZIndex: =5
+
+    "Gallery1_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderThickness: =1
+        Fill: =RGBA(232, 244, 217, 1)
+        Height: =53
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =53
+        Width: =1305
+        X: =32
+        Y: =76
+        ZIndex: =6
+
+        Separator2_1 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Label3_1 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =53
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: ="Feeder"
+            Width: =109
+            ZIndex: =6
+
+        Label5_1 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =53
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: ="District"
+            Width: =114
+            X: =192
+            ZIndex: =7
+
+        Label8_3 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =53
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: ="SMD"
+            Width: =105
+            X: =431
+            ZIndex: =8
+
+        Label8_4 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =53
+            OnSelect: =Select(Parent)
+            PaddingLeft: =10
+            Text: ="Team Member"
+            Width: =146
+            X: =718
+            ZIndex: =9
+
+        Label8_5 As label:
+            FontWeight: =FontWeight.Bold
+            Height: =53
+            OnSelect: =Select(Parent)
+            PaddingLeft: =20
+            Text: ="Close Out Status"
+            Width: =181
+            X: =951
+            ZIndex: =10
+

@@ -1,0 +1,1604 @@
+ticketFormScreen As screen:
+    Fill: =RGBA(251, 188, 159, 1)
+    LoadingSpinner: =LoadingSpinner.Controls
+    OnVisible: |+
+        =If(Lower(varTicket.reqUpdateStatus) <> "updated", UpdateContext({varUpdateVisible: true}), UpdateContext({varUpdateVisible: false})); Set(varUpdateDisabled, "Yes")
+        
+
+    updateForm As form:
+        DataSource: =approvedReqList
+        Height: =424
+        Item: =varTicket
+        NumberOfColumns: =1
+        OnSuccess: |-
+            =UpdateContext({varUpdateVisible: false})
+        Visible: =varUpdateVisible
+        Width: =1328
+        X: =22
+        Y: =Rectangle1_4.Height + 20
+        ZIndex: =1
+
+        reqUpdateStatus_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqUpdateStatus"
+            Default: =ThisItem.reqUpdateStatus
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqUpdateStatus"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqUpdateStatus")
+            Required: =false
+            Update: =DataCardValue25.Text
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =6
+            ZIndex: =1
+
+            DataCardKey27 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue25.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue25 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: ="updated"
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey27.X + DataCardKey27.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage26 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue25.Y + DataCardValue25.Height
+                ZIndex: =3
+
+            StarVisible26 As label:
+                Align: =Align.Center
+                Height: =DataCardKey27.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey27.Y
+                ZIndex: =4
+
+        requesterPP_DataCard3 As typedDataCard.comboBoxViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="requesterPP"
+            Default: =ThisItem.requesterPP
+            DisplayMode: =DisplayMode.View
+            DisplayName: ="requesterPP"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue38.Selected
+            Width: =1328
+            X: =0
+            Y: =7
+            ZIndex: =1
+
+            DataCardKey40 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Bold
+                Height: =34
+                Size: =15
+                Text: ="Requester"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue38.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue38 As combobox:
+                BorderColor: =RGBA(0, 16, 96, 1)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["DisplayName","Email","Picture"]
+                DisplayMode: =Parent.DisplayMode
+                Fill: =RGBA(232, 244, 217, 1)
+                Items: =Choices([@approvedReqList].requesterPP)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 10)
+                SearchFields: =["DisplayName"]
+                SearchItems: =Choices(approvedReqList.requesterPP,DataCardValue38.SearchText)
+                SelectMultiple: =false
+                Template: =ListItemTemplate.Person
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey40.X + DataCardKey40.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage39 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue38.Y + DataCardValue38.Height
+                ZIndex: =3
+
+            StarVisible39 As label:
+                Align: =Align.Center
+                Height: =DataCardKey40.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey40.Y
+                ZIndex: =4
+
+        reqDept_DataCard2 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqDept"
+            Default: =ThisItem.reqDept
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqDept"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =77
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqDept")
+            Required: =true
+            Update: =Dropdown3.SelectedText.Value
+            Width: =1328
+            X: =0
+            Y: =8
+            ZIndex: =1
+
+            DataCardKey32 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =15
+                Text: ="Department"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue30.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue30 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =46
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey32.X + DataCardKey32.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage30 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue30.Y + DataCardValue30.Height
+                ZIndex: =3
+
+            StarVisible30 As label:
+                Align: =Align.Center
+                Height: =DataCardKey32.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey32.Y
+                ZIndex: =4
+
+            Dropdown3 As dropdown:
+                Height: =46
+                Items: =["", "NPG", "E&S", "METERING", "O&M", "PPR", "SPRO", "I&QA", "COMMERCIAL", "OTHER"]
+                OnChange: =If(Dropdown3.SelectedText.Value = "", Set(varUpdateDisabled, "Yes"), Set(varUpdateDisabled, "No"))
+                Width: =760
+                X: =537
+                Y: =10
+                ZIndex: =5
+
+        reqName_DataCard1_4 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqName"
+            Default: =ThisItem.reqName
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqName"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqName")
+            Required: =true
+            Update: =DataCardValue3_4.Text
+            Width: =1328
+            X: =0
+            Y: =0
+            ZIndex: =2
+
+            DataCardKey3_4 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =15
+                Text: ="Request" 
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue3_4.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue3_4 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey3_4.X + DataCardKey3_4.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage3_4 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue3_4.Y + DataCardValue3_4.Height
+                ZIndex: =3
+
+            StarVisible3_4 As label:
+                Align: =Align.Center
+                Height: =DataCardKey3_4.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey3_4.Y
+                ZIndex: =4
+
+        reqCategory_DataCard1_4 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqCategory"
+            Default: =ThisItem.reqCategory
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqCategory"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =121
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqCategory")
+            Required: =false
+            Update: =Radio1_4.SelectedText.Value
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =1
+            ZIndex: =2
+
+            DataCardKey4_4 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =18
+                Text: =" Category" 
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (Radio1_4.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            ErrorMessage4_4 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =Radio1_4.Y + Radio1_4.Height
+                ZIndex: =3
+
+            StarVisible4_4 As label:
+                Align: =Align.Center
+                Height: =DataCardKey4_4.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey4_4.Y
+                ZIndex: =4
+
+            Radio1_4 As radio:
+                Height: =114
+                Italic: =true
+                Items: =["", "GIS", "Systems (SCADA, CICOD, SAP, PowerApps)"]
+                RadioSize: =30
+                Size: =18
+                Width: =761
+                X: =537
+                Y: =11
+                ZIndex: =7
+
+            Octagon1_4 As octagon:
+                Fill: =RGBA(251, 188, 159, 1)
+                Height: =50
+                Width: =47
+                X: =537
+                ZIndex: =8
+
+        reqStatus_DataCard1_4 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqStatus"
+            Default: =ThisItem.reqStatus
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqStatus"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqStatus")
+            Required: =false
+            Update: =DataCardValue5_4.Text
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =2
+            ZIndex: =2
+
+            DataCardKey5_4 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue5_4.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue5_4 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: ="Assigned" 
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey5_4.X + DataCardKey5_4.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage5_4 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue5_4.Y + DataCardValue5_4.Height
+                ZIndex: =3
+
+            StarVisible5_4 As label:
+                Align: =Align.Center
+                Height: =DataCardKey5_4.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey5_4.Y
+                ZIndex: =4
+
+        reqDescription_DataCard1_4 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqDescription"
+            Default: =ThisItem.reqDescription
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqDescription"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqDescription")
+            Required: =true
+            Update: =DataCardValue6_4.Text
+            Width: =1328
+            X: =0
+            Y: =3
+            ZIndex: =2
+
+            DataCardKey6_4 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =15
+                Text: ="Description"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue6_4.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue6_4 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Clear: =true
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =80
+                MaxLength: =Parent.MaxLength
+                Mode: =TextMode.MultiLine
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey6_4.X + DataCardKey6_4.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage6_4 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue6_4.Y + DataCardValue6_4.Height
+                ZIndex: =3
+
+            StarVisible6_4 As label:
+                Align: =Align.Center
+                Height: =DataCardKey6_4.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey6_4.Y
+                ZIndex: =4
+
+        hogTxt_DataCard1_4 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="hogPP"
+            Default: =ThisItem.hogTxt
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="hogTxt"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "hogPP")
+            Required: =false
+            Update: =DataCardValue7_4.Text
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =4
+            ZIndex: =2
+
+            DataCardKey7_4 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue7_4.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue7_4 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: |-
+                    =Switch(
+                        Lower(Radio1_4.SelectedText.Value),
+                        Lower("GIS"),
+                        "kelechi.njoku@ekedp.com",
+                        Lower("Systems (SCADA, CICOD, SAP, PowerApps)"),
+                        "okemefuna.nwabudike@ekedp.com"
+                    )
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey7_4.X + DataCardKey7_4.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage7_4 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue7_4.Y + DataCardValue7_4.Height
+                ZIndex: =3
+
+            StarVisible7_4 As label:
+                Align: =Align.Center
+                Height: =DataCardKey7_4.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey7_4.Y
+                ZIndex: =4
+
+        reqType_DataCard1_4 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqType"
+            Default: =ThisItem.reqType
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqType"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =64
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqType")
+            Required: =true
+            Update: =TextInput1.Text
+            Width: =1328
+            X: =0
+            Y: =5
+            ZIndex: =2
+
+            DataCardKey14_4 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =15
+                Text: ="Type"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (TextInput1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            ErrorMessage14_4 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =TextInput1.Y + TextInput1.Height
+                ZIndex: =3
+
+            StarVisible14_4 As label:
+                Align: =Align.Center
+                Height: =DataCardKey14_4.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey14_4.Y
+                ZIndex: =4
+
+            TextInput1 As text:
+                Default: =""
+                Height: =44
+                RadiusBottomLeft: =1
+                RadiusBottomRight: =1
+                RadiusTopLeft: =1
+                RadiusTopRight: =1
+                Width: =761
+                X: =537
+                Y: =10
+                ZIndex: =5
+
+    Rectangle1_4 As rectangle:
+        Height: =64
+        Width: =1366
+        ZIndex: =2
+
+    Icon5_8 As icon.Trash:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =39
+        Icon: =Icon.Trash
+        OnSelect: =ResetForm(updateForm);
+        Visible: =false
+        Width: =39
+        X: =111
+        Y: =12
+        ZIndex: =3
+
+    Image1_4 As image:
+        Height: =42
+        Image: =varUser.Image
+        OnSelect: =Navigate(menuScreen)
+        RadiusBottomLeft: =50
+        RadiusBottomRight: =50
+        RadiusTopLeft: =50
+        RadiusTopRight: =50
+        Width: =42
+        X: =1288
+        Y: =10
+        ZIndex: =4
+
+    Label3_4 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =48
+        Text: =varUser.FullName
+        Width: =260
+        X: =1027
+        Y: =11
+        ZIndex: =5
+
+    Icon5_9 As icon.Trash:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =33
+        Icon: =Icon.BackArrow
+        OnSelect: =Back()
+        Width: =33
+        X: =37
+        Y: =15
+        ZIndex: =6
+
+    Button1_4 As button:
+        DisplayMode: =If(varUpdateDisabled = "Yes", DisplayMode.Disabled, Edit)
+        Height: =54
+        OnSelect: =SubmitForm(updateForm)
+        RadiusBottomLeft: =2
+        RadiusBottomRight: =2
+        RadiusTopLeft: =2
+        RadiusTopRight: =2
+        Text: ="Update"
+        Visible: =varUpdateVisible 
+        Width: =1313
+        X: =17
+        Y: =454
+        ZIndex: =7
+
+    Label13 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Courier New'
+        FontWeight: =FontWeight.Semibold
+        Height: =37
+        Size: =12
+        Text: |-
+            ="Ticket ID:  " & varTicket.reqTicketID
+        Width: =332
+        X: =87
+        Y: =14
+        ZIndex: =8
+
+    completeForm As form:
+        DataSource: =approvedReqList
+        Height: =574
+        Item: =varTicket
+        NumberOfColumns: =1
+        OnSuccess: |-
+            =Patch(
+                completeReqList,
+                Defaults(completeReqList),
+                {reqName: completeForm.LastSubmit.reqName,
+                reqTicketID: completeForm.LastSubmit.reqTicketID,
+                submissionNote: completeForm.LastSubmit.submissionNote,
+                submissionDate: completeForm.LastSubmit.submissionDate,
+                Title: completeForm.LastSubmit.Title,
+                reqDept: completeForm.LastSubmit.reqDept,
+                reqCategory: completeForm.LastSubmit.reqCategory,
+                reqDescription: completeForm.LastSubmit.reqDescription,
+                reqLink: completeForm.LastSubmit.reqLink,
+                requesterPP: completeForm.LastSubmit.requesterPP,
+                'hogPP (hogPP0)': completeForm.LastSubmit.'hogPP (hogPP0)',
+                assignedDate: completeForm.LastSubmit.assignedDate
+                }
+            );
+            Navigate(successScreen)
+        Visible: =!varUpdateVisible
+        Width: =1328
+        X: =22
+        Y: =79
+        ZIndex: =9
+
+        reqUpdateStatus_DataCard1_1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqUpdateStatus"
+            Default: =ThisItem.reqUpdateStatus
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqUpdateStatus"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqUpdateStatus")
+            Required: =false
+            Update: =DataCardValue25_1.Text
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =4
+            ZIndex: =1
+
+            DataCardKey27_1 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue25_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue25_1 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: ="updated"
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey27_1.X + DataCardKey27_1.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage26_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue25_1.Y + DataCardValue25_1.Height
+                ZIndex: =3
+
+            StarVisible26_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey27_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey27_1.Y
+                ZIndex: =4
+
+        requesterPP_DataCard3_1 As typedDataCard.comboBoxViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="requesterPP"
+            Default: =ThisItem.requesterPP
+            DisplayMode: =DisplayMode.View
+            DisplayName: ="requesterPP"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue38_1.Selected
+            Width: =1328
+            X: =0
+            Y: =5
+            ZIndex: =1
+
+            DataCardKey40_1 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Text: ="Requester"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue38_1.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue38_1 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["DisplayName","Email","Picture"]
+                DisplayMode: =Parent.DisplayMode
+                Items: =Choices([@approvedReqList].requesterPP)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 5)
+                SearchFields: =["DisplayName"]
+                SearchItems: =Choices(approvedReqList.requesterPP,DataCardValue38_1.SearchText)
+                SelectMultiple: =false
+                Template: =ListItemTemplate.Person
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey40_1.X + DataCardKey40_1.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage39_1 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue38_1.Y + DataCardValue38_1.Height
+                ZIndex: =3
+
+            StarVisible39_1 As label:
+                Align: =Align.Center
+                Height: =DataCardKey40_1.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey40_1.Y
+                ZIndex: =4
+
+        submissionDate_DataCard3 As typedDataCard.dateEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="submissionDate"
+            Default: =ThisItem.submissionDate
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="submissionDate"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue40.SelectedDate
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =7
+            ZIndex: =1
+
+            DataCardKey42 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue40.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue40 As datepicker:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                DisplayMode: =Parent.DisplayMode
+                EndYear: =Year(Today())+100
+                IsEditable: =true
+                PaddingBottom: =0
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                StartYear: =1899
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey42.X + DataCardKey42.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage41 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue40.Y + DataCardValue40.Height
+                ZIndex: =3
+
+            StarVisible41 As label:
+                Align: =Align.Center
+                Height: =DataCardKey42.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey42.Y
+                ZIndex: =4
+
+        deadline_DataCard4 As typedDataCard.textualViewCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="deadline"
+            Default: =ThisItem.deadline
+            DisplayMode: =DisplayMode.View
+            DisplayName: ="deadline"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =40
+            Required: =false
+            Width: =1328
+            X: =0
+            Y: =8
+            ZIndex: =1
+
+            DataCardKey44 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Text: ="Deadline"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue42.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue42 As label:
+                DisplayMode: =Parent.DisplayMode
+                Height: =25
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Default
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey44.X + DataCardKey44.Width
+                Y: =12
+                ZIndex: =2
+
+        Attachments_DataCard4 As typedDataCard.attachmentsEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="{Attachments}"
+            Default: =ThisItem.Attachments
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="Attachments"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue39.Attachments
+            Width: =1328
+            X: =0
+            Y: =9
+            ZIndex: =1
+
+            DataCardKey41 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Bold
+                Height: =34
+                Size: =15
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue39.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue39 As attachments:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                DisplayMode: =Parent.DisplayMode
+                Height: =101
+                IsInDataCard: =true
+                Items: =Parent.Default
+                PaddingBottom: =5
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                PaddingRight: =5
+                PaddingTop: =5
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey41.X + DataCardKey41.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage40 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue39.Y + DataCardValue39.Height
+                ZIndex: =3
+
+            StarVisible40 As label:
+                Align: =Align.Center
+                Height: =DataCardKey41.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey41.Y
+                ZIndex: =4
+
+        submissionNote_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="submissionNote"
+            Default: =ThisItem.submissionNote
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="submissionNote"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =137
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "submissionNote")
+            Required: =true
+            Update: =DataCardValue31.Text
+            Width: =1328
+            X: =0
+            Y: =11
+            ZIndex: =1
+
+            DataCardKey33 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Bold
+                Height: =34
+                Size: =15
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue31.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue31 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =107
+                MaxLength: =Parent.MaxLength
+                Mode: =TextMode.MultiLine
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey33.X + DataCardKey33.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage31 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue31.Y + DataCardValue31.Height
+                ZIndex: =3
+
+            StarVisible31 As label:
+                Align: =Align.Center
+                Height: =DataCardKey33.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey33.Y
+                ZIndex: =4
+
+        reqName_DataCard1_5 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqName"
+            Default: =ThisItem.reqName
+            DisplayMode: =DisplayMode.View
+            DisplayName: ="reqName"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqName")
+            Required: =true
+            Update: =DataCardValue3_5.Text
+            Width: =1328
+            X: =0
+            Y: =0
+            ZIndex: =2
+
+            DataCardKey3_5 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =15
+                Text: ="Request" 
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue3_5.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue3_5 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =DataCardValue3_4.Text
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey3_5.X + DataCardKey3_5.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage3_5 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue3_5.Y + DataCardValue3_5.Height
+                ZIndex: =3
+
+            StarVisible3_5 As label:
+                Align: =Align.Center
+                Height: =DataCardKey3_5.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey3_5.Y
+                ZIndex: =4
+
+        reqCategory_DataCard1_5 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqCategory"
+            Default: =ThisItem.reqCategory
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqCategory"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =121
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqCategory")
+            Required: =false
+            Update: =Radio1_5.SelectedText.Value
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =1
+            ZIndex: =2
+
+            DataCardKey4_5 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =18
+                Text: =" Category" 
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (Radio1_5.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            ErrorMessage4_5 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =Radio1_5.Y + Radio1_5.Height
+                ZIndex: =3
+
+            StarVisible4_5 As label:
+                Align: =Align.Center
+                Height: =DataCardKey4_5.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey4_5.Y
+                ZIndex: =4
+
+            Radio1_5 As radio:
+                Height: =114
+                Italic: =true
+                Items: =["", "GIS", "Systems (SCADA, CICOD, SAP, PowerApps)"]
+                RadioSize: =30
+                Size: =18
+                Width: =761
+                X: =537
+                Y: =11
+                ZIndex: =7
+
+            Octagon1_5 As octagon:
+                Fill: =RGBA(251, 188, 159, 1)
+                Height: =50
+                Width: =47
+                X: =537
+                ZIndex: =8
+
+        reqStatus_DataCard1_5 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqStatus"
+            Default: =ThisItem.reqStatus
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="reqStatus"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqStatus")
+            Required: =false
+            Update: =DataCardValue5_5.Text
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =2
+            ZIndex: =2
+
+            DataCardKey5_5 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue5_5.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue5_5 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: ="Submitted" 
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey5_5.X + DataCardKey5_5.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage5_5 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue5_5.Y + DataCardValue5_5.Height
+                ZIndex: =3
+
+            StarVisible5_5 As label:
+                Align: =Align.Center
+                Height: =DataCardKey5_5.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey5_5.Y
+                ZIndex: =4
+
+        reqDescription_DataCard1_5 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="reqDescription"
+            Default: =ThisItem.reqDescription
+            DisplayMode: =DisplayMode.View
+            DisplayName: ="reqDescription"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =125
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "reqDescription")
+            Required: =true
+            Update: =DataCardValue6_5.Text
+            Width: =1328
+            X: =0
+            Y: =3
+            ZIndex: =2
+
+            DataCardKey6_5 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Semibold
+                Height: =34
+                Size: =15
+                Text: ="Description"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue6_5.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue6_5 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Clear: =true
+                Default: =DataCardValue6_4.Text   
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =115
+                MaxLength: =Parent.MaxLength
+                Mode: =TextMode.MultiLine
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey6_5.X + DataCardKey6_5.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage6_5 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue6_5.Y + DataCardValue6_5.Height
+                ZIndex: =3
+
+            StarVisible6_5 As label:
+                Align: =Align.Center
+                Height: =DataCardKey6_5.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey6_5.Y
+                ZIndex: =4
+
+        hogTxt_DataCard1_5 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="hogPP"
+            Default: =ThisItem.hogTxt
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="hogTxt"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "hogPP")
+            Required: =false
+            Update: =DataCardValue7_5.Text
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =6
+            ZIndex: =2
+
+            DataCardKey7_5 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue7_5.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue7_5 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: |-
+                    =Switch(
+                        Lower(Radio1_5.SelectedText.Value),
+                        Lower("GIS"),
+                        "kelechi.njoku@ekedp.com",
+                        Lower("Systems (SCADA, CICOD, SAP, PowerApps)"),
+                        "okemefuna.nwabudike@ekedp.com"
+                    )
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey7_5.X + DataCardKey7_5.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage7_5 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue7_5.Y + DataCardValue7_5.Height
+                ZIndex: =3
+
+            StarVisible7_5 As label:
+                Align: =Align.Center
+                Height: =DataCardKey7_5.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey7_5.Y
+                ZIndex: =4
+
+        requesterTxt_DataCard1_5 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="requesterTxt"
+            Default: =ThisItem.requesterTxt
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="requesterTxt"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@approvedReqList], DataSourceInfo.MaxLength, "requesterTxt")
+            Required: =false
+            Update: =DataCardValue16_5.Text
+            Visible: =false
+            Width: =1328
+            X: =0
+            Y: =10
+            ZIndex: =2
+
+            DataCardKey16_5 As label:
+                AutoHeight: =true
+                Height: =34
+                Text: ="Requester"
+                Width: =(Parent.Width - 60) * 0.4
+                Wrap: =false
+                X: =30
+                Y: =10 + (DataCardValue16_5.Height / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            DataCardValue16_5 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =varUser.Email
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =20
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Tooltip: =Parent.DisplayName
+                Width: =(Parent.Width - 60) * 0.6
+                X: =DataCardKey16_5.X + DataCardKey16_5.Width
+                Y: =10
+                ZIndex: =2
+
+            ErrorMessage16_5 As label:
+                AutoHeight: =true
+                FontWeight: =FontWeight.Bold
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =15
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue16_5.Y + DataCardValue16_5.Height
+                ZIndex: =3
+
+            StarVisible16_5 As label:
+                Align: =Align.Center
+                Height: =DataCardKey16_5.Height
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey16_5.Y
+                ZIndex: =4
+
+    Button1_5 As button:
+        Height: =54
+        OnSelect: =SubmitForm(completeForm)
+        RadiusBottomLeft: =5
+        RadiusBottomRight: =5
+        RadiusTopLeft: =5
+        RadiusTopRight: =5
+        Text: ="Complete"
+        Visible: =!varUpdateVisible
+        Width: =1313
+        X: =22
+        Y: =637
+        ZIndex: =10
+
+    Label6 As label:
+        Align: =Align.Center
+        Fill: =RGBA(232, 244, 217, 1)
+        Font: =Font.Verdana
+        Height: =56
+        Size: =11
+        Text: =varTicket.reqLink
+        Width: =1366
+        Y: =712
+        ZIndex: =12
+

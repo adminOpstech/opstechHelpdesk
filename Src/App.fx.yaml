@@ -1,0 +1,211 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =Concurrent(
+            Set(
+                varUser,
+                User()
+            ),
+            Set(
+                varUserMail,
+                User().Email
+            ),
+            ClearCollect(
+                twentytwenty,
+                {
+                    Name: "Aug",
+                    Strt: "08/01/2020",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "Sep",
+                    Strt: "09/01/2020",
+                    Mthn: 29,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 29
+                },
+                {
+                    Name: "Oct",
+                    Strt: "10/01/2020",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "Nov",
+                    Strt: "11/01/2020",
+                    Mthn: 29,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 29
+                },
+                {
+                    Name: "Dec",
+                    Strt: "12/01/2020",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                }
+            ),
+            ClearCollect(
+                twentytwentyone,
+                {
+                    Name: "Jan",
+                    Strt: "01/01/2021",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "Feb",
+                    Strt: "02/01/2021",
+                    Mthn: 27,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 0
+                },
+                {
+                    Name: "Mar",
+                    Strt: "03/01/2021",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "Aprl",
+                    Strt: "04/01/2021",
+                    Mthn: 29,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 29
+                },
+                {
+                    Name: "May",
+                    Strt: "05/01/2021",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "June",
+                    Strt: "06/01/2021",
+                    Mthn: 29,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 29
+                },
+                {
+                    Name: "July",
+                    Strt: "07/01/2021",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "Aug",
+                    Strt: "08/01/2021",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "Sep",
+                    Strt: "09/01/2021",
+                    Mthn: 29,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 29
+                },
+                {
+                    Name: "Oct",
+                    Strt: "10/01/2021",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                },
+                {
+                    Name: "Nov",
+                    Strt: "11/01/2021",
+                    Mthn: 29,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 29
+                },
+                {
+                    Name: "Dec",
+                    Strt: "12/01/2021",
+                    Mthn: 30,
+                    wk1: 6,
+                    wk2: 13,
+                    wk3: 20,
+                    wk4: 27,
+                    wk5: 30
+                }
+            ),
+            ClearCollect(
+                discreteDistrict,
+                {Name: "Apapa"},
+                {Name: "Ijora"},
+                {Name: "Island"},
+                {Name: "Lekki"},
+                {Name: "Mushin"},
+                {Name: "Ibeju"},
+                {Name: "Ojo"},
+                {Name: "Festac"},
+                {Name: "Agbara"},
+                {Name: "Orile"}
+            ),
+            ClearCollect(
+                projectDetails,
+                projectsDepartment
+            ),
+            ClearCollect(
+                feederCloseOutCollection,
+                feederCloseOut
+            )
+        )
+

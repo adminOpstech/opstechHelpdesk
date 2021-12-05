@@ -1,0 +1,348 @@
+"ticketsScreen As screen.'tabletLayout_HeaderAndGallery_ver3.0'":
+    Fill: =RGBA(251, 188, 159, 1)
+    OnVisible: |-
+        =UpdateContext({varTicket: Blank()})
+
+    Title1_2 As label:
+        Align: =Align.Center
+        Fill: =RGBA(50, 86, 160, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =64
+        PaddingRight: =10
+        Text: ="OPTECH SERVICE DESK (Tickets)"
+        Width: =Parent.Width
+        ZIndex: =2
+
+    Icon2_2 As icon.CheckBadge:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =35
+        Icon: =Icon.NextArrow
+        OnSelect: =Back()
+        Rotation: =180
+        Width: =35
+        X: =23
+        Y: =15
+        ZIndex: =3
+
+    Icon3_2 As icon.CheckBadge:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =35
+        Icon: =Icon.Add
+        OnSelect: =NewForm(updateForm);Navigate(ticketFormScreen)
+        Visible: =false
+        Width: =35
+        X: =1302
+        Y: =15
+        ZIndex: =4
+
+    "TemplateGalleryList1 As gallery.'BrowseLayout_Vertical_OneImageThreeColumnVariant_ver4.0'":
+        BorderColor: =RGBA(0, 0, 0, 0)
+        Height: =626
+        Items: |-
+            =SortByColumns(
+                Search(
+                    If(
+                        Lower(allTicketsDropdown_2.Selected.Value) = Lower("All") && Lower(allRecordsDropdown_2.Selected.Value) = Lower("All"),
+                        Filter(
+                            approvedReqList,
+                            tmPP.Email = varUserMail
+                        ),
+                        Lower(allTicketsDropdown_2.Selected.Value) <> Lower("All") && Lower(allRecordsDropdown_2.Selected.Value) <> Lower("All"),
+                        Filter(
+                            approvedReqList,
+                            reqDept = allTicketsDropdown_2.Selected.Value,
+                            reqStatus = allRecordsDropdown_2.Selected.Value,
+                            tmPP.Email = varUserMail
+                        ),
+                        Lower(allTicketsDropdown_2.Selected.Value) <> Lower("All") && Lower(allRecordsDropdown_2.Selected.Value) = Lower("All"),
+                        Filter(
+                            approvedReqList,
+                            requesterTxt = allTicketsDropdown_2.Selected.Value,
+                            tmPP.Email = varUserMail
+                        ),
+                        Lower(allTicketsDropdown_2.Selected.Value) = Lower("All") && Lower(allRecordsDropdown_2.Selected.Value) <> Lower("All"),
+                        Filter(
+                            approvedReqList,
+                            reqStatus = allRecordsDropdown_2.Selected.Value,
+                            tmPP.Email = varUserMail
+                        )
+                    ),
+                    TextInput1_2.Text,
+                    "reqName",
+                    "reqType"
+                ),
+                "ID",
+                Descending
+            )
+        Layout: =Layout.Vertical
+        ShowNavigation: =true
+        ShowScrollbar: =false
+        TemplatePadding: =4
+        TemplateSize: =195
+        Width: =1350
+        WrapCount: =4
+        X: =11
+        Y: =127
+        ZIndex: =10
+
+        Button2_7 As button:
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(0, 0, 0, 0)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            Fill: =If(ThisItem.IsSelected, RGBA(50, 86, 160, 0.3), Transparent)
+            Height: =190
+            HoverColor: =RGBA(0, 0, 0, 0)
+            HoverFill: =Self.Fill
+            OnSelect: =If(ThisItem.reqStatus  <> "Completed", Set(varTicket, ThisItem); Navigate(ticketFormScreen), false)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            PressedColor: =Transparent
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =3
+            RadiusBottomRight: =3
+            RadiusTopLeft: =3
+            RadiusTopRight: =3
+            Text: ="Button"
+            Width: =325
+            X: =1
+            ZIndex: =17
+
+        Group1_2 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =17
+
+            Button2_2 As button:
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(0, 0, 0, 0)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =190
+                HoverColor: =RGBA(0, 0, 0, 0)
+                HoverFill: =Self.Fill
+                OnSelect: =Select(Parent)
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                PressedColor: =Transparent
+                PressedFill: =RGBA(255, 255, 255, 1)
+                RadiusBottomLeft: =3
+                RadiusBottomRight: =3
+                RadiusTopLeft: =3
+                RadiusTopRight: =3
+                Text: ="Button"
+                Width: =324
+                X: =1
+                ZIndex: =1
+
+            Icon1_2 As icon.Waffle:
+                Height: =34
+                Icon: =Icon.Tag
+                OnSelect: =Select(Parent)
+                Rotation: |
+                    =45
+                Width: =68
+                X: =1
+                Y: =34
+                ZIndex: =3
+
+            Label1_2 As label:
+                FontWeight: =FontWeight.Semibold
+                Height: =26
+                OnSelect: =Select(Parent)
+                Size: =7
+                Text: |-
+                    ="ID: " & ThisItem.reqTicketID
+                Width: =120
+                X: =56
+                Y: =38
+                ZIndex: =4
+
+            Label2_13 As label:
+                FontWeight: =FontWeight.Semibold
+                Height: =29
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: |-
+                    ="Type: " & ThisItem.reqType
+                Width: =307
+                X: =18
+                Y: =90
+                ZIndex: =5
+
+            Label2_12 As label:
+                FontWeight: =FontWeight.Bold
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: |-
+                    ="Request:"
+                Width: =90
+                X: =18
+                Y: =76
+                ZIndex: =6
+
+            Label2_10 As label:
+                Color: =RGBA(99, 139, 44, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =31
+                Italic: =true
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: |-
+                    ="Assigned To:" & Char(10) & ThisItem.tmPP.DisplayName
+                Width: =128
+                X: =182
+                Y: =37
+                ZIndex: =7
+
+            Label2_14 As label:
+                Color: =RGBA(99, 139, 44, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =22
+                Italic: =true
+                OnSelect: =Select(Parent)
+                Size: =7
+                Text: |-
+                    ="Timeline:" & " " & ThisItem.deadline
+                Width: =112
+                X: =214
+                Y: =132
+                ZIndex: =8
+
+            Rectangle2_3 As rectangle:
+                Fill: =RGBA(251, 188, 159, 1)
+                Height: =2
+                OnSelect: =Select(Parent)
+                Width: =332.5
+                Y: =155
+                ZIndex: =9
+
+            Label2_11 As label:
+                Height: =55
+                OnSelect: =Select(Parent)
+                PaddingLeft: =0
+                Size: =8
+                Text: =ThisItem.reqName
+                Width: =246
+                X: =79
+                Y: =60
+                ZIndex: =11
+
+            Rectangle4_2 As rectangle:
+                Fill: =RGBA(251, 188, 159, 1)
+                Height: =10
+                OnSelect: =Select(Parent)
+                Width: =Switch(Lower(ThisItem.reqStatus), "pending", 10, "assigned", 130, "submitted", 130, "completed", 260)
+                X: =19
+                Y: =171
+                ZIndex: =13
+
+            Label4_2 As label:
+                FontWeight: =FontWeight.Semibold
+                Height: =29
+                OnSelect: =Select(Parent)
+                Size: =9
+                Text: =Switch(Lower(ThisItem.reqStatus), "pending", "0%" , "assigned", "50%", "submitted", "50%", "completed", "100%")
+                Width: =42
+                X: =283
+                Y: =161
+                ZIndex: =14
+
+            Label5_2 As label:
+                Height: =24
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: |-
+                    ="Requester's Name:"
+                Width: =126
+                X: =18
+                Y: =119
+                ZIndex: =15
+
+            Label6_2 As label:
+                Height: =24
+                Italic: =true
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.requesterPP.DisplayName
+                Width: =100
+                X: =125
+                Y: =119
+                ZIndex: =16
+
+    Group2_2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =10
+
+        TextInput1_2 As text:
+            BorderThickness: =1
+            Default: =""
+            Height: =41
+            HintText: ="Search Records"
+            PaddingLeft: =40
+            PaddingRight: =40
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Width: =660
+            X: =690
+            Y: =76
+            ZIndex: =5
+
+        Icon4_4 As icon.Search:
+            Height: =18
+            Icon: =Icon.Search
+            Rotation: =90
+            Width: =18
+            X: =TextInput1_2.X + 10
+            Y: =87
+            ZIndex: =6
+
+        Icon4_5 As icon.Search:
+            Height: =18
+            Icon: =Icon.Cancel
+            OnSelect: =Reset(TextInput1_2)
+            Rotation: =90
+            Width: =18
+            X: =App.DesignWidth - 50
+            Y: =87
+            ZIndex: =7
+
+        allTicketsDropdown_2 As dropdown:
+            Items: =["All", "NPG", "E&S", "Metering", "Others"]
+            Width: =323
+            X: =17
+            Y: =76
+            ZIndex: =8
+
+        allRecordsDropdown_2 As dropdown:
+            Items: =["All","Assigned", "Completed"]
+            Width: =323
+            X: =353
+            Y: =76
+            ZIndex: =9
+
+    Image2_1 As image:
+        Height: =43
+        Image: =varUser.Image
+        RadiusBottomLeft: =540
+        RadiusBottomRight: =540
+        RadiusTopLeft: =540
+        RadiusTopRight: =540
+        Width: =43
+        X: =1305
+        Y: =11
+        ZIndex: =11
+

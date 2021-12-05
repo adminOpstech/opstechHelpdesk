@@ -1,0 +1,47 @@
+Screen2 As screen:
+    Fill: |-
+        =  !IsBlank(
+                LookUp(
+                    npgMembers,
+                    varUserMail in teamMember.Email
+                )
+            ),
+            Set(
+                varNav,
+                npgDetailsScreen
+            ),
+            !IsBlank(
+                LookUp(
+                    esMembers,
+                    varUserMail in teamMember.Email
+                )
+            ),
+            Set(
+                varNav,
+                esDetailsScreen
+            ),
+            !IsBlank(
+                LookUp(
+                    omMembers,
+                    varUserMail in teamMember.Email
+                )
+            ),
+            Set(
+                varNav,
+                omDetailsScreen
+            ),
+            !IsBlank(
+                LookUp(
+                    meteringMembers,
+                    varUserMail in teamMember.Email
+                )
+            ),
+            Set(
+                varNav,
+                meteringDetailsScreen
+            ),
+            Set(
+                varNav,
+                successScreen
+        ))
+
